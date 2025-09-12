@@ -143,6 +143,56 @@
       };
 
       const menuItems = [
+        {
+          id: 1000,
+          name: 'Promo Mastropizza',
+          category: Category.Pizzas,
+          description: 'Una pizza más una bebida',
+          price: 1000,
+          imageUrls: ['https://scontent.faep9-1.fna.fbcdn.net/v/t39.30808-6/435626298_951071273685651_118182989182069670_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=u0Z_W0_y4JgQ7kNvgH0hXfA&_nc_ht=scontent.faep9-1.fna&oh=00_AYC2vV44IqW2tY7jR_p4r64EwzM7rD6kL3rVv2D_D-n_OQ&oe=66736458'],
+          isPromo: true,
+        },
+        // MastroPizzas
+        {
+          id: 901,
+          name: 'Mastropizza de 12 porciones, hasta 4 sabores',
+          category: Category.Pizzas,
+          description: '¡Pizza gigante para compartir! Elige hasta 4 sabores distintos.',
+          price: 18000,
+          imageUrls: ['https://s2-oglobo.glbimg.com/5d4BjkYykotKFxtGv41iLOMOp8A=/0x0:2355x1592/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2024/Z/T/Bo7lsdTdKS8PEdYuautg/107608847.jpg'],
+          isMastro: true,
+          portions: 12,
+        },
+        {
+          id: 903,
+          name: 'Mastropizza de 12 porciones, hasta 3 sabores',
+          category: Category.Pizzas,
+          description: '¡Pizza gigante para compartir! Elige hasta 3 sabores de 4 porciones cada uno.',
+          price: 18000,
+          imageUrls: ['https://s2-oglobo.glbimg.com/5d4BjkYykotKFxtGv41iLOMOp8A=/0x0:2355x1592/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2024/Z/T/Bo7lsdTdKS8PEdYuautg/107608847.jpg'],
+          isMastro: true,
+          portions: 12,
+        },
+        {
+          id: 902,
+          name: 'Mastropizza de 6 porciones, hasta 2 sabores',
+          category: Category.Pizzas,
+          description: '¡Mitad y mitad! Elige hasta 2 sabores.',
+          price: 10500,
+          imageUrls: ['https://s2-oglobo.glbimg.com/5d4BjkYykotKFxtGv41iLOMOp8A=/0x0:2355x1592/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2024/Z/T/Bo7lsdTdKS8PEdYuautg/107608847.jpg'],
+          isMastro: true,
+          portions: 6,
+        },
+        {
+          id: 904,
+          name: 'Mastropizza de 3 porciones, 1 sabor',
+          category: Category.Pizzas,
+          description: '¡Un cuarto de pizza! Elige tu sabor favorito.',
+          price: 5000,
+          imageUrls: ['https://s2-oglobo.glbimg.com/5d4BjkYykotKFxtGv41iLOMOp8A=/0x0:2355x1592/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2024/Z/T/Bo7lsdTdKS8PEdYuautg/107608847.jpg'],
+          isMastro: true,
+          portions: 3,
+        },
         // Pizzas
         { id: 101, name: 'Pizza de Acelga y Roquefort', category: Category.Pizzas, description: 'Salsa de tomate, mozzarella, acelga, roquefort, parmesano, orégano, aceituna.', price: 18000, halfPrice: 10500, quarterPrice: 5000, ingredients: ['Salsa de tomate', 'mozzarella', 'acelga', 'roquefort', 'parmesano', 'orégano', 'aceituna'], prepTime: '20-25 min', imageUrls: ['https://dieguitoushuaia.com/wp-content/uploads/2020/09/muzzarella.jpg']},
         { id: 102, name: 'Pizza de Ananá', category: Category.Pizzas, description: 'Salsa de tomate, mozzarella, ananá, azúcar negra.', price: 18000, halfPrice: 10500, quarterPrice: 5000, ingredients: ['Salsa de tomate', 'mozzarella', 'ananá', 'azúcar negra'], prepTime: '20-25 min', imageUrls: ['https://dieguitoushuaia.com/wp-content/uploads/2020/09/muzzarella.jpg']},
@@ -292,11 +342,15 @@
         );
       }
       
-      function MenuItemCard({ item, onSelect, onAdd, onAddHalf, onAddQuarter, onAddThird }) {
-        const isStandardPizza = item.category === Category.Pizzas && item.halfPrice && item.quarterPrice;
+      function MenuItemCard({ item, onSelect, onAdd, onAddHalf, onAddQuarter }) {
+        const isStandardPizza = item.category === Category.Pizzas && !item.isMastro && item.halfPrice && item.quarterPrice;
 
         const handleImageClick = () => {
-          onSelect(item);
+          if (item.isMastro) {
+            onAdd(item);
+          } else {
+            onSelect(item);
+          }
         };
 
         return (
@@ -308,46 +362,412 @@
                 
                 <div className="mt-auto pt-2">
                     {isStandardPizza ? (
-                        <div className="grid grid-cols-4 gap-1 text-center">
-                            {/* Entera */}
-                            <div className="flex flex-col items-center">
+                        <div className="grid grid-cols-3 gap-2 text-center">
+                            {/* Column: Entera */}
+                            <div className="flex flex-col items-center space-y-1">
                                 <p className="font-semibold text-brand-text text-sm">Entera</p>
-                                <span className="text-sm font-semibold text-brand-accent tabular-nums h-6 flex items-center justify-center">{formatPrice(item.price)}</span>
-                                <button onClick={() => onAdd(item)} className="bg-brand-accent text-white w-full mt-1 py-1.5 rounded-md font-semibold hover:bg-orange-600 transition-all text-sm">Agregar</button>
+                                <span className="text-lg font-bold text-brand-accent">{formatPrice(item.price)}</span>
+                                <button 
+                                    onClick={() => onAdd(item)} 
+                                    className="bg-brand-accent text-white w-full mt-1 py-2 rounded-md font-semibold hover:bg-orange-600 transition-all transform hover:scale-105 text-sm"
+                                >
+                                  Agregar
+                                </button>
                             </div>
-                            {/* Media */}
-                            <div className="flex flex-col items-center">
+                            {/* Column: Media */}
+                            <div className="flex flex-col items-center space-y-1">
                                 <p className="font-semibold text-brand-text text-sm">Media</p>
-                                <span className="text-sm font-semibold text-brand-accent tabular-nums h-6 flex items-center justify-center">{formatPrice(item.halfPrice)}</span>
-                                <button onClick={() => onAddHalf(item)} className="bg-brand-accent text-white w-full mt-1 py-1.5 rounded-md font-semibold hover:bg-orange-600 transition-all text-sm">Agregar</button>
+                                <span className="text-lg font-bold text-brand-accent">{formatPrice(item.halfPrice)}</span>
+                                <button 
+                                    onClick={() => onAddHalf(item)} 
+                                    className="bg-brand-accent text-white w-full mt-1 py-2 rounded-md font-semibold hover:bg-orange-600 transition-all transform hover:scale-105 text-sm"
+                                >
+                                  Agregar
+                                </button>
                             </div>
-                            {/* Cuarto */}
-                            <div className="flex flex-col items-center">
+                            {/* Column: Cuarto */}
+                            <div className="flex flex-col items-center space-y-1">
                                 <p className="font-semibold text-brand-text text-sm">Cuarto</p>
-                                <span className="text-sm font-semibold text-brand-accent tabular-nums h-6 flex items-center justify-center">{formatPrice(item.quarterPrice)}</span>
-                                <button onClick={() => onAddQuarter(item)} className="bg-brand-accent text-white w-full mt-1 py-1.5 rounded-md font-semibold hover:bg-orange-600 transition-all text-sm">Agregar</button>
-                            </div>
-                            {/* 1/3 Pizza */}
-                            <div className="flex flex-col items-center">
-                                <p className="font-semibold text-brand-text text-sm">1/3 Pizza</p>
-                                <span className="text-xs text-brand-text-light leading-tight h-6 flex items-center justify-center">3 Sabores</span>
-                                <button onClick={() => onAddThird(item)} className="bg-brand-teal text-white w-full mt-1 py-1.5 rounded-md font-semibold hover:bg-teal-600 transition-all text-sm">Armar</button>
+                                <span className="text-lg font-bold text-brand-accent">{formatPrice(item.quarterPrice)}</span>
+                                <button 
+                                    onClick={() => onAddQuarter(item)} 
+                                    className="bg-brand-accent text-white w-full mt-1 py-2 rounded-md font-semibold hover:bg-orange-600 transition-all transform hover:scale-105 text-sm"
+                                >
+                                  Agregar
+                                </button>
                             </div>
                         </div>
                     ) : (
                         <div className="flex justify-between items-center">
-                            <span className="text-xl font-bold text-brand-accent">{formatPrice(item.price)}</span>
+                            { !item.isMastro && <span className="text-xl font-bold text-brand-accent">{formatPrice(item.price)}</span> }
                             <button 
                                 onClick={() => onAdd(item)} 
-                                className="bg-brand-accent text-white py-2 px-4 rounded-md font-semibold hover:bg-orange-600 transition-all transform hover:scale-105"
+                                className={`bg-brand-accent text-white py-2 rounded-md font-semibold hover:bg-orange-600 transition-all transform hover:scale-105 ${item.isMastro ? 'w-full' : 'px-4'}`}
                             >
-                                Agregar
+                                {item.isMastro ? 'Armar Pizza' : 'Agregar'}
                             </button>
                         </div>
                     )}
                 </div>
               </div>
             </div>
+        );
+      }
+
+      function PizzaVisualizer({ baseItem, selectedFlavors = {} }) {
+        const totalPortions = baseItem.portions;
+        const isLargePizza = totalPortions === 12;
+        const isQuarterPizza = totalPortions === 3;
+
+        const totalCells = isLargePizza ? 12 : (isQuarterPizza ? 3 : 6);
+        const gridCols = isLargePizza ? 'grid-cols-6' : (isQuarterPizza ? 'grid-cols-1' : 'grid-cols-3');
+        const widthClass = isLargePizza ? 'w-64' : (isQuarterPizza ? 'w-16' : 'w-32');
+        const containerShapeClass = isLargePizza ? 'rounded-full' : (isQuarterPizza ? 'rounded-tl-full rounded-bl-full' : 'rounded-l-full');
+
+        const fillColor = 'bg-orange-500';
+        
+        const finalCellClasses = Array(totalCells).fill('bg-gray-700/50');
+        
+        const sortedFlavorKeys = Object.keys(selectedFlavors).sort();
+        const filledPortions = sortedFlavorKeys.reduce((sum, key) => sum + selectedFlavors[key], 0);
+
+        if (baseItem.id === 903) { // Special logic for 3-flavor pizza
+            const flavorChunks = [[0, 1, 6, 7], [2, 3, 8, 9], [4, 5, 10, 11]];
+            sortedFlavorKeys.forEach((flavorId, chunkIndex) => {
+                const chunkIndices = flavorChunks[chunkIndex];
+                chunkIndices.forEach(cellIndex => {
+                    if (cellIndex < totalCells) {
+                        finalCellClasses[cellIndex] = fillColor;
+                    }
+                });
+            });
+        } else if (isQuarterPizza) {
+            if (filledPortions > 0) {
+                finalCellClasses.fill(fillColor);
+            }
+        } else { // Default logic for 2/4 flavors
+            const verticalCellOrder12 = [0, 6, 1, 7, 2, 8, 3, 9, 4, 10, 5, 11]; // Fills left-to-right
+            const horizontalCellOrder12 = Array.from(Array(12).keys()); // Fills top-to-bottom [0, 1, ..., 11]
+            const sequentialCellOrder6 = Array.from(Array(6).keys()); // For 6-slice pizza [0, ..., 5]
+
+            let cellOrder;
+            if (isLargePizza) {
+                // Apply vertical fill only for 1/2 pizza (6 portions)
+                cellOrder = filledPortions === 6 ? verticalCellOrder12 : horizontalCellOrder12;
+            } else {
+                cellOrder = sequentialCellOrder6;
+            }
+            
+            let currentCellIndex = 0;
+            sortedFlavorKeys.forEach((flavorId) => {
+              const portions = selectedFlavors[flavorId];
+              for (let i = 0; i < portions; i++) {
+                if (currentCellIndex < totalCells) {
+                  const targetCell = cellOrder[currentCellIndex];
+                  finalCellClasses[targetCell] = fillColor;
+                  currentCellIndex++;
+                }
+              }
+            });
+        }
+        
+        let description = '';
+        if (baseItem.id === 901) { // 4 flavors
+            description = `${filledPortions / 3} de 4 sabores seleccionados`;
+        } else if (baseItem.id === 903) { // 3 flavors
+            description = `${filledPortions / 4} de 3 sabores seleccionados`;
+        } else if (baseItem.id === 902) { // 2 flavors
+            description = `${filledPortions / 3} de 2 sabores seleccionados`;
+        } else if (isQuarterPizza) {
+            description = `${filledPortions > 0 ? 1 : 0} de 1 sabor seleccionado`;
+        } else {
+            description = `${filledPortions} de ${totalPortions} porciones`;
+        }
+
+        const getCornerClasses = (index) => {
+          if (isLargePizza) { // 6x2 grid for 12 portions
+            if (index === 0) return 'rounded-tl-full';
+            if (index === 5) return 'rounded-tr-full';
+            if (index === 6) return 'rounded-bl-full';
+            if (index === 11) return 'rounded-br-full';
+          } else if (isQuarterPizza) {
+            if (index === 0) return 'rounded-tl-full';
+            if (index === 2) return 'rounded-bl-full';
+          } else { // 3x2 grid for 6 portions
+            if (index === 0) return 'rounded-tl-full';
+            if (index === 3) return 'rounded-bl-full';
+          }
+          return '';
+        };
+
+        return (
+          <div className="flex flex-col items-center">
+            <div className={`${widthClass} bg-black p-1 ${containerShapeClass} overflow-hidden`}>
+              <div className={`grid ${gridCols} gap-1`}>
+                {finalCellClasses.map((colorClass, i) => (
+                  <div
+                    key={i}
+                    className={`w-full aspect-square ${colorClass} ${getCornerClasses(i)} transition-colors duration-300`}
+                  />
+                ))}
+              </div>
+            </div>
+            <p className="text-brand-text-light font-semibold mt-3 text-center tabular-nums">
+              {description}
+            </p>
+          </div>
+        );
+      }
+
+      function MastroBuilderModal({ baseItem, onClose, onConfirm }) {
+        if (!baseItem) return null;
+        
+        const [currentBaseItem, setCurrentBaseItem] = useState(baseItem);
+        const [selectedFlavors, setSelectedFlavors] = useState({}); // e.g., { 1: 3, 4: 3 } -> { itemId: portions }
+
+        useEffect(() => {
+          // When the modal is opened with a new baseItem, reset everything
+          setCurrentBaseItem(baseItem);
+          setSelectedFlavors({});
+        }, [baseItem]);
+        
+        const pizzaFlavors = useMemo(() => menuItems.filter(item => item.category === Category.Pizzas && !item.isMastro), []);
+
+        const totalPortions = currentBaseItem.portions;
+        const filledPortions = Object.values(selectedFlavors).reduce((sum, p) => sum + p, 0);
+        const remainingPortions = totalPortions - filledPortions;
+        const isReadyToAdd = filledPortions === totalPortions;
+        const hasFlavors = Object.keys(selectedFlavors).length > 0;
+        
+        const price = useMemo(() => {
+            if (!currentBaseItem || !hasFlavors) return 0;
+            const flavorIds = Object.keys(selectedFlavors);
+            const flavorId = flavorIds[0];
+
+            if (currentBaseItem.portions === 3) {
+                // The price is the quarter price of the chosen flavor
+                return flavorId ? itemsById[flavorId].quarterPrice : 0;
+            }
+            if (currentBaseItem.portions === 6) {
+                // Price is the highest halfPrice among selected flavors
+                return Math.max(...flavorIds.map(id => itemsById[id].halfPrice));
+            }
+            if (currentBaseItem.portions === 12) {
+                // Price is the highest full price among selected flavors
+                return Math.max(...flavorIds.map(id => itemsById[id].price));
+            }
+
+            return 0; // Fallback
+        }, [currentBaseItem, selectedFlavors, hasFlavors]);
+        
+        const handleSwitchMode = (targetId) => {
+          const targetPizza = menuItems.find(item => item.id === targetId);
+          if (targetPizza) {
+            setCurrentBaseItem(targetPizza);
+            setSelectedFlavors({});
+          }
+        };
+
+        const handleAddFlavor = (item, portions) => {
+          if (portions > remainingPortions) return;
+          setSelectedFlavors(prev => ({ ...prev, [item.id]: portions }));
+        };
+        
+        const handleRemoveFlavor = (itemId) => {
+          setSelectedFlavors(prev => {
+            const newFlavors = { ...prev };
+            delete newFlavors[itemId];
+            return newFlavors;
+          });
+        };
+
+        const getPortionLabel = (portions, total) => {
+            if (currentBaseItem.id === 903) {
+                if (portions === 4) return '⅓';
+                if (portions === 8) return '⅔';
+                if (portions === 12) return 'Completa';
+            }
+            if (portions === total) return 'Completa';
+            if (total === 6) return '½'; // for 3 portions
+            if (total === 12) {
+                if (portions === 3) return '¼';
+                if (portions === 6) return '½';
+                if (portions === 9) return '¾';
+            }
+            return `${portions} porc.`; // Fallback
+        };
+
+        const handleConfirmMastroPizza = (pizzaData) => {
+            const { baseItem, selectedFlavors, price } = pizzaData;
+
+            const customId = `mastro-${Date.now()}`;
+            const description = selectedFlavors
+                .map(f => {
+                  const portionLabel = getPortionLabel(f.portions, baseItem.portions);
+                  return `${f.item.name} (${portionLabel})`;
+                })
+                .join(' + ');
+
+            const mastroPizzaItem = {
+                id: customId,
+                name: baseItem.name,
+                description: description, // Used for display in the cart on the page
+                price: price,
+                category: Category.Pizzas,
+                // New properties for detailed WhatsApp message
+                totalPortions: baseItem.portions,
+                flavors: selectedFlavors.map(f => ({ name: f.item.name, portions: f.portions })),
+            };
+            
+            onConfirm(mastroPizzaItem);
+        };
+
+        const handleConfirm = () => {
+          const finalSelectedFlavors = Object.entries(selectedFlavors).map(([id, portions]) => ({
+            item: itemsById[id],
+            portions: portions,
+          }));
+
+          handleConfirmMastroPizza({
+            baseItem: currentBaseItem,
+            selectedFlavors: finalSelectedFlavors,
+            price: price,
+          });
+        };
+
+        const getPortionButtons = (item) => {
+            let buttons = [];
+            if (currentBaseItem.id === 903) { // 12 portions, 3 flavors
+                buttons = [
+                    { portions: 4, label: '⅓' },
+                    { portions: 12, label: 'Completa' },
+                ];
+            } else if (totalPortions === 12) { // 12 portions, 4 flavors
+                buttons = [
+                    { portions: 3, label: '¼' },
+                    { portions: 6, label: '½' },
+                    { portions: 9, label: '¾' },
+                    { portions: 12, label: 'Completa' },
+                ];
+            } else if (totalPortions === 6) {
+                buttons = [ 
+                    { portions: 3, label: '½' },
+                    { portions: 6, label: 'Completa' },
+                ];
+            } else if (totalPortions === 3) {
+                buttons = [ { portions: 3, label: 'Completa' } ];
+            }
+            return buttons.map(btn => (
+              <button
+                key={btn.portions}
+                onClick={() => handleAddFlavor(item, btn.portions)}
+                disabled={btn.portions > remainingPortions}
+                className="bg-brand-accent text-white px-3 py-2 text-sm rounded-md font-semibold hover:bg-orange-600 transition-all disabled:bg-gray-600/70 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {totalPortions === 3 ? 'Pedir' : `+ ${btn.label}`}
+              </button>
+            ));
+        };
+
+        return (
+          <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center animate-fade-in p-4" onClick={onClose}>
+            <div className="bg-brand-card rounded-md shadow-xl w-full max-w-2xl h-[90vh] flex flex-col animate-fade-in-up border border-gray-600" onClick={e => e.stopPropagation()}>
+              {/* Header */}
+              <div className="p-4 border-b border-gray-700 flex-shrink-0">
+                <h2 className="text-2xl font-extralight text-brand-accent font-display">{currentBaseItem.name}</h2>
+                <p className="text-brand-text-light font-light">
+                  {currentBaseItem.portions === 3 ? 'Elige el sabor para tu pizza.' : 'Elige los sabores para completar tu pizza.'}
+                </p>
+              </div>
+              
+              <div className="flex-grow overflow-hidden flex flex-col">
+                  {/* Visualizer */}
+                  {totalPortions > 0 && (
+                    <div className="flex-shrink-0 bg-brand-card/80 backdrop-blur-sm z-10 border-b border-gray-700 py-4 flex justify-center items-center gap-4">
+                      <PizzaVisualizer
+                        baseItem={currentBaseItem}
+                        selectedFlavors={selectedFlavors}
+                      />
+                      {(baseItem.id === 901 || baseItem.id === 903) && (
+                        <div className="flex flex-col space-y-2">
+                           {currentBaseItem.id === 901 ? (
+                             <button onClick={() => handleSwitchMode(903)} className="bg-brand-teal text-white py-2 px-3 rounded-md font-semibold hover:bg-teal-600 transition-colors text-sm">
+                               Elegir 3 Sabores
+                             </button>
+                           ) : (
+                             <button onClick={() => handleSwitchMode(901)} className="bg-brand-teal text-white py-2 px-3 rounded-md font-semibold hover:bg-teal-600 transition-colors text-sm">
+                               Elegir 4 Sabores
+                             </button>
+                           )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Main Content: Flavor List */}
+                  <div className="flex-grow overflow-y-auto p-4 space-y-3 no-scrollbar">
+                    {pizzaFlavors.map(flavor => {
+                      const selectedPortion = selectedFlavors[flavor.id];
+                      const isSelected = !!selectedPortion;
+
+                      return (
+                        <div 
+                          key={flavor.id} 
+                          className={`p-3 rounded-md flex flex-col border transition-all duration-300 ${isSelected ? 'bg-brand-accent/20 border-brand-accent' : 'bg-gray-800 border-gray-700'}`}
+                        >
+                          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+                            <div className="md:pr-4 mb-3 md:mb-0 text-center md:text-left">
+                              <h4 className="font-semibold text-brand-text">{flavor.name}</h4>
+                            </div>
+                            <div className="flex gap-2 items-center flex-shrink-0 w-full justify-around md:w-auto md:justify-start">
+                              {isSelected ? (
+                                  <div className="flex items-center justify-between gap-3 animate-fade-in w-full">
+                                      <span className="text-lg font-semibold text-brand-accent whitespace-nowrap">
+                                          {`Seleccionado: ${getPortionLabel(selectedPortion, totalPortions)}`}
+                                      </span>
+                                      <button
+                                          onClick={() => handleRemoveFlavor(flavor.id)}
+                                          className="bg-red-500/20 text-red-400 px-5 py-3 text-base rounded-md font-semibold hover:bg-red-500/40 transition-colors"
+                                          aria-label={`Quitar selección de ${flavor.name}`}
+                                      >
+                                          Eliminar
+                                      </button>
+                                  </div>
+                              ) : (
+                                getPortionButtons(flavor)
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+              </div>
+
+
+              {/* Footer */}
+              <div className="p-4 border-t border-gray-700 flex-shrink-0 bg-brand-header rounded-b-md">
+                  <div className="flex justify-between items-center mb-4 min-h-[2.5rem]">
+                    <div>
+                      <span className="text-lg font-semibold text-brand-text">Precio Final:</span>
+                    </div>
+                    {hasFlavors && <span className="text-2xl font-bold text-brand-accent animate-fade-in">{formatPrice(price)}</span>}
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button onClick={onClose} className="bg-gray-700 text-brand-text py-3 rounded-md font-semibold hover:bg-gray-600 transition-colors">Cancelar</button>
+                    <button 
+                      onClick={handleConfirm} 
+                      disabled={!isReadyToAdd} 
+                      className="bg-brand-accent text-white py-3 rounded-md font-semibold hover:bg-orange-600 transition-transform transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed disabled:scale-100">
+                      Agregar al Carrito
+                    </button>
+                  </div>
+                  {!isReadyToAdd && (
+                      <p className="text-xs text-brand-text-light mt-2 text-center">Debes completar las {totalPortions} porciones para agregar al carrito.</p>
+                  )}
+              </div>
+            </div>
+          </div>
         );
       }
 
@@ -524,14 +944,16 @@
         );
       }
 
-      function MenuPage({ onSelectItem, onAdd, selectedCategory, onAddHalf, onAddQuarter, onAddThird }) {
+      function MenuPage({ onSelectItem, onAdd, selectedCategory, onAddHalf, onAddQuarter }) {
         const renderAllItems = () => {
             const categoryOrder = [Category.Pizzas, Category.Hamburguesas, Category.Sanguches, Category.Bebidas];
             
             return (
                 <div className="p-4 space-y-8">
                     {categoryOrder.map(category => {
-                        const itemsInCategory = menuItems.filter(item => item.category === category);
+                        const itemsInCategory = menuItems.filter(item => 
+                            item.category === category && (category !== Category.Pizzas || item.isMastro || item.isPromo)
+                        );
                         if (itemsInCategory.length === 0) return null;
                         
                         return (
@@ -539,7 +961,7 @@
                                 <h2 id={`category-title-${category}`} className="font-display text-2xl font-extralight text-brand-accent pb-2 mb-6 border-b-2 border-brand-accent/30">{category}</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {itemsInCategory.map(item => (
-                                        <MenuItemCard key={item.id} item={item} onSelect={onSelectItem} onAdd={onAdd} onAddHalf={onAddHalf} onAddQuarter={onAddQuarter} onAddThird={onAddThird} />
+                                        <MenuItemCard key={item.id} item={item} onSelect={onSelectItem} onAdd={onAdd} onAddHalf={onAddHalf} onAddQuarter={onAddQuarter} />
                                     ))}
                                 </div>
                             </section>
@@ -550,11 +972,13 @@
         };
 
         const renderFilteredItems = () => {
-            const filteredItems = menuItems.filter(item => item.category === selectedCategory);
+            const filteredItems = menuItems.filter(item => 
+                item.category === selectedCategory && (selectedCategory !== Category.Pizzas || item.isMastro || item.isPromo)
+            );
             return (
                 <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-6">
                     {filteredItems.map(item => (
-                        <MenuItemCard key={item.id} item={item} onSelect={onSelectItem} onAdd={onAdd} onAddHalf={onAddHalf} onAddQuarter={onAddQuarter} onAddThird={onAddThird} />
+                        <MenuItemCard key={item.id} item={item} onSelect={onSelectItem} onAdd={onAdd} onAddHalf={onAddHalf} onAddQuarter={onAddQuarter} />
                     ))}
                 </div>
             );
@@ -664,9 +1088,31 @@
           const orderLines = [];
           
           cartItems.forEach((item) => {
-              if (item.isCustom) {
-                  orderLines.push(`*1- ${item.name} (${item.description}) – ${formatPrice(item.price)}*`);
-              }
+              // MastroPizza (quantity is always 1)
+              if (item.id.startsWith('mastro-')) {
+                  let size;
+                  if (item.totalPortions === 12) size = '1';
+                  else if (item.totalPortions === 6) size = '1/2';
+                  else if (item.totalPortions === 3) size = '1/4';
+
+                  const flavorDetails = item.flavors.map(flavor => {
+                      const flavorName = flavor.name.replace(/^Pizza (de )?/, '');
+                      // For single flavor pizzas (like the 3-portion one), just list the name
+                      if (item.flavors.length === 1 && flavor.portions === item.totalPortions) {
+                          return flavorName;
+                      }
+
+                      // For multi-flavor items, show the flavor name and its fraction of a full 12-slice pizza.
+                      let fractionStr = '';
+                      if (flavor.portions === 3) fractionStr = '1/4';
+                      else if (flavor.portions === 6) fractionStr = '1/2';
+                      else if (flavor.portions === 9) fractionStr = '3/4';
+                      
+                      return `${flavorName} ${fractionStr}`.trim();
+                  }).join(' - ');
+                  
+                  orderLines.push(`*${size}- ${flavorDetails}*`);
+              } 
               // Half Pizza (quantity is always 1)
               else if (item.isHalf || String(item.id).endsWith('-half')) {
                   const baseName = item.name.replace('Media ', '');
@@ -734,7 +1180,7 @@
             )
         }
         
-        const isFixedQuantityItem = (item) => item.isHalf || String(item.id).startsWith('custom-') || item.isQuarter || item.isCustom;
+        const isFractionalPizza = (item) => item.isHalf || String(item.id).endsWith('-half') || item.isQuarter || String(item.id).endsWith('-quarter') || item.id.startsWith('mastro-');
 
         // --- Desktop View ---
         if (isDesktop) {
@@ -753,14 +1199,14 @@
                                 <div key={item.id} className="flex items-center justify-between py-2 border-b border-gray-700/50 last:border-b-0 gap-2 bg-gray-800/50 p-3 rounded-md">
                                     <div className="flex-grow">
                                         <p className="font-semibold text-sm">{item.name}</p>
-                                        {(item.isHalf || item.isQuarter || item.isCustom) && item.description && <p className="text-xs text-brand-text-light font-light mt-1">{item.description}</p>}
+                                        {(item.id.startsWith('mastro-') || item.isHalf || item.isQuarter) && item.description && <p className="text-xs text-brand-text-light font-light mt-1">{item.description}</p>}
                                         <div className="flex items-center space-x-3 mt-2">
                                             <div className="flex items-center space-x-1 rounded-md bg-gray-900 p-0.5">
-                                                <button onClick={() => updateCart(item.id, item.quantity - 1)} className="bg-gray-700 hover:bg-gray-600 rounded p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFixedQuantityItem(item)} aria-label={`Disminuir cantidad de ${item.name}`}>
+                                                <button onClick={() => updateCart(item.id, item.quantity - 1)} className="bg-gray-700 hover:bg-gray-600 rounded p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFractionalPizza(item)} aria-label={`Disminuir cantidad de ${item.name}`}>
                                                     <MinusIcon />
                                                 </button>
                                                 <span className="font-bold w-5 text-center text-sm" aria-live="polite">{item.quantity}</span>
-                                                <button onClick={() => updateCart(item.id, item.quantity + 1)} className="bg-gray-700 hover:bg-gray-600 rounded p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFixedQuantityItem(item)} aria-label={`Aumentar cantidad de ${item.name}`}>
+                                                <button onClick={() => updateCart(item.id, item.quantity + 1)} className="bg-gray-700 hover:bg-gray-600 rounded p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFractionalPizza(item)} aria-label={`Aumentar cantidad de ${item.name}`}>
                                                     <PlusIcon />
                                                 </button>
                                             </div>
@@ -833,14 +1279,14 @@
                     <div key={item.id} className="flex items-center justify-between py-3 border-b border-gray-700 last:border-b-0 gap-2">
                         <div className="flex-grow">
                             <p className="font-semibold">{item.name}</p>
-                            {(item.isHalf || item.isQuarter || item.isCustom) && item.description && <p className="text-sm text-brand-text-light font-light">{item.description}</p>}
+                            {(item.id.startsWith('mastro-') || item.isHalf || item.isQuarter) && item.description && <p className="text-sm text-brand-text-light font-light">{item.description}</p>}
                             <div className="flex items-center space-x-4 mt-2">
                                 <div className="flex items-center space-x-2 rounded-md bg-gray-800 p-1">
-                                    <button onClick={() => updateCart(item.id, item.quantity - 1)} className="bg-gray-700 hover:bg-gray-600 rounded-md p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFixedQuantityItem(item)} aria-label={`Disminuir cantidad de ${item.name}`}>
+                                    <button onClick={() => updateCart(item.id, item.quantity - 1)} className="bg-gray-700 hover:bg-gray-600 rounded-md p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFractionalPizza(item)} aria-label={`Disminuir cantidad de ${item.name}`}>
                                         <MinusIcon />
                                     </button>
                                     <span className="font-bold w-6 text-center" aria-live="polite">{item.quantity}</span>
-                                    <button onClick={() => updateCart(item.id, item.quantity + 1)} className="bg-gray-700 hover:bg-gray-600 rounded-md p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFixedQuantityItem(item)} aria-label={`Aumentar cantidad de ${item.name}`}>
+                                    <button onClick={() => updateCart(item.id, item.quantity + 1)} className="bg-gray-700 hover:bg-gray-600 rounded-md p-1 text-brand-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled={isFractionalPizza(item)} aria-label={`Aumentar cantidad de ${item.name}`}>
                                         <PlusIcon />
                                     </button>
                                 </div>
@@ -920,114 +1366,21 @@
           </nav>
         );
       }
-      
-      function PizzaBuilderModal({ isOpen, onClose, onConfirm, allPizzas }) {
-        const [selectedFlavors, setSelectedFlavors] = useState([]);
-        const MAX_FLAVORS = 3;
-
-        const toggleFlavor = (pizza) => {
-            setSelectedFlavors(prev => {
-                const isSelected = prev.find(p => p.id === pizza.id);
-                if (isSelected) {
-                    return prev.filter(p => p.id !== pizza.id);
-                } else {
-                    if (prev.length < MAX_FLAVORS) {
-                        return [...prev, pizza];
-                    }
-                    return prev;
-                }
-            });
-        };
-
-        const handleConfirm = () => {
-            if (selectedFlavors.length === MAX_FLAVORS) {
-                onConfirm(selectedFlavors);
-                onClose();
-            } else {
-                alert(`Debes seleccionar ${MAX_FLAVORS} sabores.`);
-            }
-        };
-
-        useEffect(() => {
-            if (!isOpen) {
-                setSelectedFlavors([]);
-            }
-        }, [isOpen]);
-
-        if (!isOpen) return null;
-
-        return (
-            <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center animate-fade-in p-4" onClick={onClose}>
-                <div className="bg-brand-card rounded-md shadow-xl w-full max-w-lg h-[90vh] flex flex-col border border-gray-600" onClick={e => e.stopPropagation()}>
-                    {/* Header */}
-                    <div className="p-4 border-b border-gray-700 flex-shrink-0">
-                        <h2 className="text-2xl font-extralight font-display text-brand-text">Armá tu MastroPizza</h2>
-                        <p className="text-brand-text-light">Seleccioná 3 sabores para tu pizza.</p>
-                    </div>
-
-                    {/* Flavor List */}
-                    <div className="flex-grow overflow-y-auto p-4 no-scrollbar">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {allPizzas.map(pizza => {
-                                const isSelected = selectedFlavors.some(p => p.id === pizza.id);
-                                const isDisabled = !isSelected && selectedFlavors.length >= MAX_FLAVORS;
-                                return (
-                                    <button 
-                                        key={pizza.id}
-                                        onClick={() => toggleFlavor(pizza)}
-                                        disabled={isDisabled}
-                                        className={`p-3 rounded-md border text-left transition-all ${
-                                            isSelected ? 'bg-brand-accent/30 border-brand-accent' : 'bg-gray-700 border-gray-600 hover:border-brand-accent/50'
-                                        } ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                    >
-                                        <h4 className="font-semibold text-brand-text">{pizza.name}</h4>
-                                        <p className="text-xs text-brand-text-light">{pizza.description}</p>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="p-4 border-t border-gray-700 flex-shrink-0">
-                         <div className="mb-4">
-                            <h3 className="font-extralight text-brand-text mb-2">Sabores seleccionados: {selectedFlavors.length} / {MAX_FLAVORS}</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {selectedFlavors.length > 0 ? selectedFlavors.map(p => (
-                                    <span key={p.id} className="bg-brand-accent/20 text-brand-accent text-sm font-medium px-2 py-1 rounded-full">{p.name.replace('Pizza de ', '')}</span>
-                                )) : (
-                                    <p className="text-brand-text-light text-sm">Aún no has seleccionado sabores.</p>
-                                )}
-                            </div>
-                        </div>
-                        <div className="flex justify-between items-center mb-4">
-                            <span className="text-lg font-semibold text-brand-text">Total:</span>
-                            <span className="text-2xl font-bold text-brand-accent">{formatPrice(20000)}</span>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <button onClick={onClose} className="bg-gray-700 text-brand-text py-3 rounded-md font-semibold hover:bg-gray-600">Cancelar</button>
-                            <button onClick={handleConfirm} disabled={selectedFlavors.length !== MAX_FLAVORS} className="bg-brand-accent text-white py-3 rounded-md font-semibold hover:bg-orange-600 disabled:bg-gray-500 disabled:cursor-not-allowed">
-                                Agregar al Carrito
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-      }
-
 
       // --- APP ---
       function App() {
         const [view, setView] = useState('menu'); // 'menu', 'about', 'checkout'
         const [cart, setCart] = useState({}); // { itemId: quantity }
-        const [customItems, setCustomItems] = useState({}); // For Half/Quarter Pizzas
+        const [customItems, setCustomItems] = useState({}); // For MastroPizzas and HalfPizzas
         const [selectedItem, setSelectedItem] = useState(null);
         const [itemToQuickAdd, setItemToQuickAdd] = useState(null);
         const [halfPizzaToAdd, setHalfPizzaToAdd] = useState(null);
         const [quarterPizzaToAdd, setQuarterPizzaToAdd] = useState(null);
         const [selectedCategory, setSelectedCategory] = useState(Category.Todos);
-        const [isBuilderOpen, setIsBuilderOpen] = useState(false);
+        const [mastroBuilderState, setMastroBuilderState] = useState({
+          isOpen: false,
+          baseItem: null,
+        });
 
         useEffect(() => {
           try {
@@ -1061,7 +1414,8 @@
             const newCart = { ...prevCart };
             if (quantity <= 0) {
               delete newCart[itemId];
-              if (String(itemId).includes('-half') || String(itemId).includes('-quarter') || String(itemId).startsWith('custom-')) {
+              // Also remove from custom items if it exists there
+              if (String(itemId).startsWith('mastro-') || String(itemId).endsWith('-half') || String(itemId).endsWith('-quarter')) {
                   setCustomItems(prevCustom => {
                       const newCustom = {...prevCustom};
                       delete newCustom[itemId];
@@ -1077,7 +1431,7 @@
 
         const addToCart = useCallback((item, quantity) => {
             const itemId = item.id;
-            if (item.isHalf || item.isQuarter || item.isCustom) {
+            if (item.isHalf || item.isQuarter || String(item.id).startsWith('mastro-')) {
                 setCustomItems(prev => ({...prev, [itemId]: item}));
             }
             
@@ -1091,9 +1445,24 @@
           setCart({});
           setCustomItems({});
         }, []);
+
+        const openMastroBuilder = (mastroItem) => {
+            setMastroBuilderState({
+                isOpen: true,
+                baseItem: mastroItem,
+            });
+        };
+        
+        const closeMastroBuilder = () => {
+            setMastroBuilderState({ isOpen: false, baseItem: null });
+        };
         
         const handleAddItemClick = (item) => {
-          setItemToQuickAdd(item);
+          if (item.isMastro) {
+            openMastroBuilder(item);
+          } else {
+            setItemToQuickAdd(item);
+          }
         };
 
         const handleHalfPizzaClick = (item) => {
@@ -1112,30 +1481,6 @@
                 return;
             }
             setQuarterPizzaToAdd(item);
-        };
-
-        const handleAddThirdClick = () => {
-            setIsBuilderOpen(true);
-        };
-
-        const handleConfirmBuilder = (selectedFlavorItems) => {
-            const pizzaName = `MastroPizza 3 Sabores`;
-            const flavorNames = selectedFlavorItems.map(p => p.name.replace(/^Pizza (de )?/, '')).join(', ');
-            const description = `Una combinación de: ${flavorNames}.`;
-            const price = 20000;
-            
-            const customPizza = {
-                id: `custom-3s-${Date.now()}`,
-                name: pizzaName,
-                description: description,
-                price: price,
-                isCustom: true,
-                category: Category.Pizzas,
-                imageUrls: ['https://dieguitoushuaia.com/wp-content/uploads/2020/09/muzzarella.jpg']
-            };
-
-            addToCart(customPizza, 1);
-            setIsBuilderOpen(false);
         };
 
         const handleConfirmAddHalfPizza = (originalItem) => {
@@ -1170,9 +1515,11 @@
             setQuarterPizzaToAdd(null);
         };
 
-        const pizzaOptionsForBuilder = useMemo(() => 
-            menuItems.filter(item => item.category === Category.Pizzas && item.halfPrice && item.quarterPrice), 
-        []);
+        const handleConfirmMastroPizza = (mastroPizzaItem) => {
+            addToCart(mastroPizzaItem, 1);
+            closeMastroBuilder();
+        };
+
 
         const cartCount = useMemo(() => Object.values(cart).reduce((sum, q) => sum + q, 0), [cart]);
 
@@ -1195,7 +1542,6 @@
                          onAdd={handleAddItemClick}
                          onAddHalf={handleHalfPizzaClick}
                          onAddQuarter={handleQuarterPizzaClick}
-                         onAddThird={handleAddThirdClick}
                          selectedCategory={selectedCategory}
                        />
                      )}
@@ -1245,12 +1591,13 @@
               onClose={() => setQuarterPizzaToAdd(null)}
               onConfirm={handleConfirmAddQuarterPizza}
             />
-             <PizzaBuilderModal 
-                isOpen={isBuilderOpen}
-                onClose={() => setIsBuilderOpen(false)}
-                onConfirm={handleConfirmBuilder}
-                allPizzas={pizzaOptionsForBuilder}
-            />
+            {mastroBuilderState.isOpen && (
+              <MastroBuilderModal 
+                baseItem={mastroBuilderState.baseItem} 
+                onClose={closeMastroBuilder} 
+                onConfirm={handleConfirmMastroPizza} 
+              />
+            )}
             
             {/* Mobile-only Bottom Nav */}
             <BottomNav view={view} setView={handleSetView} cartCount={cartCount} />
