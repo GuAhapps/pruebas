@@ -139,15 +139,14 @@
         Pizzas: 'Pizzas',
         Hamburguesas: 'Hamburguesas',
         Sanguches: 'Sánguches',
-        Bebidas: 'Bebidas',
       };
 
       const menuItems = [
         {
           id: 1000,
-          name: 'Promo Mastropizza',
+          name: 'Combo Mini Mastro',
           category: Category.Pizzas,
-          description: 'Una pizza más una bebida',
+          description: 'Mini pizza de 3 porciones + gaseosa de 500ml',
           price: 1000,
           imageUrls: ['https://scontent.faep9-1.fna.fbcdn.net/v/t39.30808-6/435626298_951071273685651_118182989182069670_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=u0Z_W0_y4JgQ7kNvgH0hXfA&_nc_ht=scontent.faep9-1.fna&oh=00_AYC2vV44IqW2tY7jR_p4r64EwzM7rD6kL3rVv2D_D-n_OQ&oe=66736458'],
           isPromo: true,
@@ -243,19 +242,14 @@
         { id: 147, name: 'Pizza de Provoleta', category: Category.Pizzas, description: 'Salsa de tomate, mozzarella, rúcula, parmesano, provoleta, orégano, aceituna.', price: 18000, halfPrice: 10500, quarterPrice: 5000, ingredients: ['Salsa de tomate', 'mozzarella', 'rúcula', 'parmesano', 'provoleta', 'orégano', 'aceituna'], prepTime: '20-25 min', imageUrls: ['https://dieguitoushuaia.com/wp-content/uploads/2020/09/muzzarella.jpg']},
         { id: 148, name: 'Pizza de Peperoni', category: Category.Pizzas, description: 'Salsa de tomate, mozzarella, peperoni, orégano, aceituna.', price: 18000, halfPrice: 10500, quarterPrice: 5000, ingredients: ['Salsa de tomate', 'mozzarella', 'peperoni', 'orégano', 'aceituna'], prepTime: '20-25 min', imageUrls: ['https://dieguitoushuaia.com/wp-content/uploads/2020/09/muzzarella.jpg']},
         // Hamburguesas
-        { id: 5, name: 'Hamburguesa Clásica', category: Category.Hamburguesas, description: 'Carne de primera, lechuga, tomate y nuestra salsa especial en pan brioche.', price: 100, ingredients: ['Carne de res', 'Pan brioche', 'Lechuga', 'Tomate', 'Cebolla', 'Salsa especial'], prepTime: '15-20 min', imageUrls: ['https://jetextramar.com/wp-content/uploads/2021/07/congelados-receta-hamburguesa-de-pollo-1024x768.jpg']},
-        { id: 6, name: 'Hamburguesa Doble Cheddar', category: Category.Hamburguesas, description: 'Doble medallón de carne, doble porción de queso cheddar y panceta crujiente.', price: 100, ingredients: ['Doble carne de res', 'Pan brioche', 'Queso cheddar', 'Panceta', 'Pepinillos'], prepTime: '15-20 min', imageUrls: ['https://media-cdn.tripadvisor.com/media/photo-s/1c/c7/15/d1/holy-cheese-doble-hamburguesa.jpg']},
-        { id: 7, name: 'Hamburguesa Criolla', category: Category.Hamburguesas, description: 'Con provoleta grillada, morrones asados y salsa criolla.', price: 100, ingredients: ['Carne de res', 'Pan rústico', 'Queso provoleta', 'Morrones asados', 'Huevo frito', 'Salsa criolla'], prepTime: '20-25 min', imageUrls: ['https://i.pinimg.com/1200x/03/82/15/0382153476c9ca4d2b7dfe4b69032bf7.jpg']},
-        { id: 8, name: 'Hamburguesa Veggie', category: Category.Hamburguesas, description: 'Medallón de lentejas y champiñones, con rúcula, tomate y mayonesa de palta.', price: 100, ingredients: ['Medallón de lentejas', 'Pan integral', 'Rúcula', 'Tomate', 'Mayonesa de palta', 'Cebolla morada'], prepTime: '15-20 min', imageUrls: ['https://www.conasi.eu/blog/wp-content/uploads/2022/05/hamburguesa-vegana-1.jpg']},
+        { id: 5, name: 'Hamburguesa Simple', category: Category.Hamburguesas, description: 'Medallón de carne y queso, acompañada de papas fritas.', price: 100, ingredients: ['Medallón de carne', 'Queso', 'Papas fritas'], imageUrls: []},
+        { id: 6, name: 'Hamburguesa Completa', category: Category.Hamburguesas, description: 'Medallón de carne, jamón, queso, huevo frito, tomate y lechuga, con papas fritas.', price: 100, ingredients: ['Medallón de carne', 'Jamón', 'Queso', 'Huevo frito', 'Tomate', 'Lechuga', 'Papas fritas'], imageUrls: []},
+        { id: 7, name: 'Hamburguesa Panceta y Cheddar', category: Category.Hamburguesas, description: 'Medallón de carne, panceta, cheddar, huevo frito, tomate y lechuga, con papas fritas.', price: 100, ingredients: ['Medallón de carne', 'Panceta', 'Cheddar', 'Huevo frito', 'Tomate', 'Lechuga', 'Papas fritas'], imageUrls: []},
+        { id: 8, name: 'Hamburguesa Criolla', category: Category.Hamburguesas, description: 'Medallón de carne, jamón, queso, cebolla, morrón, huevo frito, tomate y lechuga, con papas fritas.', price: 100, ingredients: ['Medallón de carne', 'Jamón', 'Queso', 'Cebolla', 'Morrón', 'Huevo frito', 'Tomate', 'Lechuga', 'Papas fritas'], imageUrls: []},
         // Sánguches
-        { id: 17, name: 'Sánguche de Milanesa Completo', category: Category.Sanguches, description: 'Milanesa de ternera, lechuga, tomate, jamón, queso y huevo frito en pan francés.', price: 100, ingredients: ['Pan francés', 'Milanesa de ternera', 'Lechuga', 'Tomate', 'Jamón', 'Queso', 'Huevo frito'], prepTime: '15-20 min', imageUrls: ['https://www.tafiviejo.gob.ar/fotos/cache/notas/2024/10/08/830x465_241008004008_43152.jpg']},
-        { id: 18, name: 'Sánguche de Lomito', category: Category.Sanguches, description: 'Bife de lomo tierno, lechuga, tomate, jamón, queso, huevo y mayonesa casera.', price: 100, ingredients: ['Pan árabe', 'Bife de lomo', 'Lechuga', 'Tomate', 'Jamón', 'Queso', 'Huevo frito', 'Mayonesa'], prepTime: '15-20 min', imageUrls: ['https://www.clarin.com/img/2021/07/19/hgA-CEG32_1256x620__2.jpg']},
-        { id: 19, name: 'Triple Tostado', category: Category.Sanguches, description: 'Un clásico sándwich de tres capas con jamón, queso, lechuga y tomate, perfectamente tostado.', price: 100, ingredients: ['Pan de miga triple', 'Jamón cocido', 'Queso de máquina', 'Lechuga', 'Tomate'], prepTime: '10-15 min', imageUrls: ['https://img-global.cpcdn.com/recipes/59296a703611b07c/300x426cq80/sandwich-triple-de-jamon-y-queso-foto-principal.webp']},
-        // Bebidas
-        { id: 25, name: 'Gaseosa Línea Coca-Cola', category: Category.Bebidas, description: 'Lata de 354ml. Elige entre Coca-Cola Original, Sin Azúcar o Light.', price: 100, ingredients: [], prepTime: 'N/A', imageUrls: ['https://latorrepizza.com.ar/wp-content/uploads/2023/03/B-GASEOSAS-min.jpg']},
-        { id: 26, name: 'Agua Saborizada', category: Category.Bebidas, description: 'Botella de 500ml. Sabores: Manzana, Naranja, Pomelo.', price: 100, ingredients: [], prepTime: 'N/A', imageUrls: ['https://acdn.mitiendanube.com/stores/001/157/846/products/levitess-4e72e9073979c1786317062059644811-480-0.webp']},
-        { id: 27, name: 'Cerveza Quilmes Clásica', category: Category.Bebidas, description: 'Lata de 473ml de la cerveza más popular de Argentina.', price: 100, ingredients: [], prepTime: 'N/A', imageUrls: ['https://shop.gustoargentino.com/cdn/shop/files/cerveza-quilmes.png?v=1741175524&width=640']},
-        { id: 28, name: 'Vino Malbec (Copa)', category: Category.Bebidas, description: 'Una copa de nuestro Malbec de la casa, intenso y frutado.', price: 100, ingredients: [], prepTime: 'N/A', imageUrls: ['https://static.wixstatic.com/media/fe24ac_b2fe3b0b1fb84203891261b4fe4615b6~mv2.webp']},
+        { id: 301, name: 'Lomito', category: Category.Sanguches, description: 'Lomito, jamón, queso, huevo frito, lechuga, tomate, con papas fritas.', price: 100, ingredients: ['Pan', 'Lomito', 'Jamón', 'Queso', 'Huevo frito', 'Lechuga', 'Tomate', 'Papas fritas'], imageUrls: []},
+        { id: 302, name: 'Juancho', category: Category.Sanguches, description: 'Jamón, queso, lechuga y tomate en pan de miga.', price: 100, ingredients: ['Pan de miga', 'Jamón', 'Queso', 'Lechuga', 'Tomate'], imageUrls: []},
+        { id: 303, name: 'Sacramento', category: Category.Sanguches, description: 'Jamón, queso, lechuga y tomate en pan árabe.', price: 100, ingredients: ['Pan árabe', 'Jamón', 'Queso', 'Lechuga', 'Tomate'], imageUrls: []},
       ];
 
       const itemsById = menuItems.reduce((acc, item) => {
@@ -306,7 +300,7 @@
       }
       
       function CategoryNav({ selectedCategory, setSelectedCategory }) {
-        const categories = [Category.Todos, Category.Pizzas, Category.Hamburguesas, Category.Sanguches, Category.Bebidas];
+        const categories = [Category.Todos, Category.Pizzas, Category.Hamburguesas, Category.Sanguches];
         const navRef = useRef(null);
 
         useEffect(() => {
@@ -344,8 +338,9 @@
       
       function MenuItemCard({ item, onSelect, onAdd, onAddHalf, onAddQuarter }) {
         const isStandardPizza = item.category === Category.Pizzas && !item.isMastro && item.halfPrice && item.quarterPrice;
+        const hasImage = item.imageUrls && item.imageUrls.length > 0;
 
-        const handleImageClick = () => {
+        const handleSelect = () => {
           if (item.isMastro) {
             onAdd(item);
           } else {
@@ -355,9 +350,11 @@
 
         return (
             <div className={`bg-brand-card rounded-md border border-gray-700 overflow-hidden flex flex-col animate-fade-in-up transition-all hover:border-brand-accent/50`}>
-              <img src={item.imageUrls[0]} alt={item.name} className="w-full h-40 object-cover cursor-pointer" onClick={handleImageClick} />
+              {hasImage && <img src={item.imageUrls[0]} alt={item.name} className="w-full h-40 object-cover cursor-pointer" onClick={handleSelect} />}
               <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-extralight text-brand-text flex-grow">{item.name}</h3>
+                <h3 className={`text-lg font-extralight text-brand-text flex-grow ${!hasImage ? 'cursor-pointer' : ''}`} onClick={!hasImage ? handleSelect : undefined}>
+                  {item.name}
+                </h3>
                 <p className="text-brand-text-light text-sm mb-4 font-light">{item.description}</p>
                 
                 <div className="mt-auto pt-2">
@@ -917,7 +914,9 @@
               <button onClick={onClose} className="absolute top-4 left-4 z-10 bg-gray-900/80 backdrop-blur-sm rounded-md p-2 text-brand-text hover:bg-gray-800/90 transition-transform transform hover:scale-110" aria-label="Volver al menú">
                   <ChevronLeftIcon />
               </button>
-              <img src={item.imageUrls[0]} alt={item.name} className="w-full h-64 object-cover" />
+              {item.imageUrls && item.imageUrls.length > 0 && (
+                <img src={item.imageUrls[0]} alt={item.name} className="w-full h-64 object-cover" />
+              )}
               <div className="p-6">
                 <h2 className="text-3xl font-extralight font-display text-brand-text mb-2">{item.name}</h2>
                 <p className="text-brand-text-light mb-4 font-light">{item.description}</p>
@@ -946,13 +945,13 @@
 
       function MenuPage({ onSelectItem, onAdd, selectedCategory, onAddHalf, onAddQuarter }) {
         const renderAllItems = () => {
-            const categoryOrder = [Category.Pizzas, Category.Hamburguesas, Category.Sanguches, Category.Bebidas];
+            const categoryOrder = [Category.Pizzas, Category.Hamburguesas, Category.Sanguches];
             
             return (
                 <div className="p-4 space-y-8">
                     {categoryOrder.map(category => {
                         const itemsInCategory = menuItems.filter(item => 
-                            item.category === category && (category !== Category.Pizzas || item.isMastro || item.isPromo)
+                            item.category === category && (category !== Category.Pizzas || item.isMastro || item.isPromo) && item.id !== 903
                         );
                         if (itemsInCategory.length === 0) return null;
                         
@@ -973,7 +972,7 @@
 
         const renderFilteredItems = () => {
             const filteredItems = menuItems.filter(item => 
-                item.category === selectedCategory && (selectedCategory !== Category.Pizzas || item.isMastro || item.isPromo)
+                item.category === selectedCategory && (selectedCategory !== Category.Pizzas || item.isMastro || item.isPromo) && item.id !== 903
             );
             return (
                 <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-6">
